@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Wolfgang Frötscher - Tierarzt in der Josefstadt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5f8d;
+            --primary-dark: #1e4266;
+            --accent: #6db3b8;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-light);
+            padding: 0.25rem;
+            border-radius: 25px;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 6rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50%;
+            width: 150%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-30px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Opening Hours Section */
+        .hours-section {
+            padding: 3rem 5%;
+            background: var(--white);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .day-card:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(44, 95, 141, 0.3);
+        }
+
+        .day-card:hover .day-name,
+        .day-card:hover .day-time {
+            color: var(--white);
+        }
+
+        .day-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .day-time {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .day-card.closed {
+            opacity: 0.6;
+        }
+
+        .day-card.closed .day-time {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-text p {
+            color: var(--text-light);
+        }
+
+        .special-note {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border-left: 4px solid #ff9800;
+        }
+
+        .special-note h4 {
+            color: #e65100;
+            margin-bottom: 0.5rem;
+        }
+
+        .special-note p {
+            color: #bf360c;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.5,10.5C4.5,12.15 5.85,13.5 7.5,13.5C9.15,13.5 10.5,12.15 10.5,10.5H4.5M6.5,10.5C6.5,10.5 6.5,8.5 6.5,8.5C6.5,7.4 7.4,6.5 8.5,6.5C9.6,6.5 10.5,7.4 10.5,8.5M13.5,10.5C13.5,12.15 14.85,13.5 16.5,13.5C18.15,13.5 19.5,12.15 19.5,10.5H13.5M15.5,10.5C15.5,10.5 15.5,8.5 15.5,8.5C15.5,7.4 16.4,6.5 17.5,6.5C18.6,6.5 19.5,7.4 19.5,8.5M12,17.5C10.67,17.5 9.33,18.17 8.5,19.5C7.67,18.17 6.33,17.5 5,17.5C5,17.5 5,19.5 5,19.5C5,20.6 5.9,21.5 7,21.5C8.1,21.5 9,20.6 9,19.5C9,20.6 9.9,21.5 11,21.5H13C14.1,21.5 15,20.6 15,19.5C15,20.6 15.9,21.5 17,21.5C18.1,21.5 19,20.6 19,19.5C19,19.5 19,17.5 19,17.5C17.67,17.5 16.33,18.17 15.5,19.5C14.67,18.17 13.33,17.5 12,17.5M12,2.5C9,2.5 7,4.5 7,4.5C7,4.5 9,6.5 12,6.5C15,6.5 17,4.5 17,4.5C17,4.5 15,2.5 12,2.5Z"/>
+                </svg>
+                <span>Dr. Wolfgang Frötscher</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#home" data-de="Startseite" data-en="Home">Startseite</a></li>
+                <li><a href="#services" data-de="Leistungen" data-en="Services">Leistungen</a></li>
+                <li><a href="#about" data-de="Über Uns" data-en="About">Über Uns</a></li>
+                <li><a href="#hours" data-de="Öffnungszeiten" data-en="Opening Hours">Öffnungszeiten</a></li>
+                <li><a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a></li>
+                <li>
+                    <div class="lang-switch">
+                        <button class="lang-btn active" onclick="setLanguage('de')">DE</button>
+                        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                    </div>
+                </li>
+            </ul>
+
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Dr. Wolfgang Frötscher</h1>
+                <h2 data-de="Ihr Tierarzt in der Josefstadt" data-en="Your Veterinarian in Josefstadt">
+                    Ihr Tierarzt in der Josefstadt
+                </h2>
+                <p data-de="Herzlich Willkommen in unserer Ordination. Wir bieten professionelle und liebevolle Betreuung für Ihre Haustiere."
+                   data-en="Welcome to our practice. We offer professional and caring treatment for your pets.">
+                    Herzlich Willkommen in unserer Ordination. Wir bieten professionelle und liebevolle Betreuung für Ihre Haustiere.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <span data-de="Termin vereinbaren" data-en="Book Appointment">Termin vereinbaren</span>
+                    </a>
+                    <a href="tel:+43014053300" class="btn btn-secondary">
+                        📞 01 405 3300
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/anfangsfassade1.jpg" alt="Dr. Frötscher Tierarztpraxis">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-de="Unsere Leistungen" data-en="Our Services">Unsere Leistungen</h2>
+                <p data-de="Umfassende Betreuung für Ihre Haustiere" data-en="Comprehensive care for your pets">
+                    Umfassende Betreuung für Ihre Haustiere
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3 data-de="Allgemeinmedizin" data-en="General Medicine">Allgemeinmedizin</h3>
+                    <p data-de="Routineuntersuchungen, Impfungen und präventive Gesundheitsvorsorge für alle Haustiere."
+                       data-en="Routine examinations, vaccinations and preventive healthcare for all pets.">
+                        Routineuntersuchungen, Impfungen und präventive Gesundheitsvorsorge für alle Haustiere.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔬</div>
+                    <h3 data-de="Labordiagnostik" data-en="Laboratory Diagnostics">Labordiagnostik</h3>
+                    <p data-de="Modernste Laborausstattung für schnelle und präzise Diagnosen direkt vor Ort."
+                       data-en="State-of-the-art laboratory equipment for fast and accurate on-site diagnostics.">
+                        Modernste Laborausstattung für schnelle und präzise Diagnosen direkt vor Ort.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💉</div>
+                    <h3 data-de="Chirurgie" data-en="Surgery">Chirurgie</h3>
+                    <p data-de="Routine- und Spezialoperationen mit erfahrener Betreuung und modernster Ausstattung."
+                       data-en="Routine and specialized surgeries with experienced care and modern equipment.">
+                        Routine- und Spezialoperationen mit erfahrener Betreuung und modernster Ausstattung.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3 data-de="Zahnmedizin" data-en="Dentistry">Zahnmedizin</h3>
+                    <p data-de="Professionelle Zahnreinigung, Zahnbehandlungen und Kieferchirurgie."
+                       data-en="Professional dental cleaning, dental treatments and oral surgery.">
+                        Professionelle Zahnreinigung, Zahnbehandlungen und Kieferchirurgie.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📷</div>
+                    <h3 data-de="Bildgebung" data-en="Imaging">Bildgebung</h3>
+                    <p data-de="Digitales Röntgen, Ultraschall und weitere bildgebende Verfahren."
+                       data-en="Digital X-ray, ultrasound and other imaging procedures.">
+                        Digitales Röntgen, Ultraschall und weitere bildgebende Verfahren.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3 data-de="Vorsorgeuntersuchungen" data-en="Preventive Care">Vorsorgeuntersuchungen</h3>
+                    <p data-de="Regelmäßige Gesundheitschecks zur Früherkennung und Prävention von Krankheiten."
+                       data-en="Regular health checks for early detection and prevention of diseases.">
+                        Regelmäßige Gesundheitschecks zur Früherkennung und Prävention von Krankheiten.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-de="Über unsere Ordination" data-en="About Our Practice">Über unsere Ordination</h2>
+                    <p data-de="Dr. Wolfgang Frötscher und sein Team heißen Sie herzlich willkommen in unserer Tierarztpraxis in der Josefstadt. Mit langjähriger Erfahrung und modernster Ausstattung sorgen wir für die optimale medizinische Betreuung Ihrer Lieblinge."
+                       data-en="Dr. Wolfgang Frötscher and his team warmly welcome you to our veterinary practice in Josefstadt. With years of experience and state-of-the-art equipment, we provide optimal medical care for your beloved pets.">
+                        Dr. Wolfgang Frötscher und sein Team heißen Sie herzlich willkommen in unserer Tierarztpraxis in der Josefstadt. Mit langjähriger Erfahrung und modernster Ausstattung sorgen wir für die optimale medizinische Betreuung Ihrer Lieblinge.
+                    </p>
+                    <p data-de="Um die Wartezeiten für alle Tierbesitzer so kurz wie möglich zu halten, bitten wir um telefonische Terminvereinbarung. Wir nehmen uns Zeit für Sie und Ihr Tier."
+                       data-en="To keep waiting times as short as possible for all pet owners, we ask for telephone appointments. We take time for you and your pet.">
+                        Um die Wartezeiten für alle Tierbesitzer so kurz wie möglich zu halten, bitten wir um telefonische Terminvereinbarung. Wir nehmen uns Zeit für Sie und Ihr Tier.
+                    </p>
+
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label" data-de="Jahre Erfahrung" data-en="Years Experience">Jahre Erfahrung</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label" data-de="Zufriedene Patienten" data-en="Happy Patients">Zufriedene Patienten</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">6</span>
+                            <span class="stat-label" data-de="Tage geöffnet" data-en="Days Open">Tage geöffnet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23e8f4f8' width='600' height='400'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='20' fill='%232c5f8d' text-anchor='middle' dominant-baseline='middle'%3ETeam Photo%3C/text%3E%3C/svg%3E" alt="Our Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Hours Section -->
+    <section class="hours-section" id="hours">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-de="Öffnungszeiten" data-en="Opening Hours">Öffnungszeiten</h2>
+                <p data-de="Nach telefonischer Vereinbarung" data-en="By telephone appointment">Nach telefonischer Vereinbarung</p>
+            </div>
+
+            <div class="hours-grid">
+                <div class="day-card">
+                    <div class="day-name" data-de="Montag" data-en="Monday">Montag</div>
+                    <div class="day-time">17:00 - 19:00</div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-name" data-de="Dienstag" data-en="Tuesday">Dienstag</div>
+                    <div class="day-time">17:00 - 19:00</div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-name" data-de="Mittwoch" data-en="Wednesday">Mittwoch</div>
+                    <div class="day-time">08:00 - 10:00</div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-name" data-de="Donnerstag" data-en="Thursday">Donnerstag</div>
+                    <div class="day-time">17:00 - 19:00</div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-name" data-de="Freitag" data-en="Friday">Freitag</div>
+                    <div class="day-time">17:00 - 19:00</div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-name" data-de="Samstag" data-en="Saturday">Samstag</div>
+                    <div class="day-time">10:00 - 12:00</div>
+                </div>
+
+                <div class="day-card closed">
+                    <div class="day-name" data-de="Sonntag" data-en="Sunday">Sonntag</div>
+                    <div class="day-time" data-de="Geschlossen" data-en="Closed">Geschlossen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-de="Kontaktieren Sie uns" data-en="Contact Us">Kontaktieren Sie uns</h2>
+                <p data-de="Wir sind für Sie und Ihre Tiere da" data-en="We're here for you and your pets">
+                    Wir sind für Sie und Ihre Tiere da
+                </p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 data-de="Tierarzt Dr. Wolfgang Frötscher" data-en="Veterinarian Dr. Wolfgang Frötscher">Tierarzt Dr. Wolfgang Frötscher</h3>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4 data-de="Adresse" data-en="Address">Adresse</h4>
+                            <p>Florianigasse 43<br>1080 Wien, Österreich</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4 data-de="Telefon" data-en="Phone">Telefon</h4>
+                            <p>+43 1 405 3300</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-text">
+                            <h4 data-de="Ordinationszeiten" data-en="Office Hours">Ordinationszeiten</h4>
+                            <p data-de="Mo, Di, Do, Fr: 17-19 Uhr<br>Mi: 08-10 Uhr<br>Sa: 10-12 Uhr<br>So: Geschlossen"
+                               data-en="Mon, Tue, Thu, Fri: 5-7 PM<br>Wed: 8-10 AM<br>Sat: 10 AM-12 PM<br>Sun: Closed">
+                                Mo, Di, Do, Fr: 17-19 Uhr<br>Mi: 08-10 Uhr<br>Sa: 10-12 Uhr<br>So: Geschlossen
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-text">
+                            <h4>E-Mail</h4>
+                            <p>praxis@tierarzt-froetscher.at</p>
+                        </div>
+                    </div>
+
+                    <div class="special-note">
+                        <h4 data-de="Wichtiger Hinweis" data-en="Important Note">Wichtiger Hinweis</h4>
+                        <p data-de="Notdienst: 0-24 Uhr nur nach telefonischer Voranmeldung. Bitte vereinbaren Sie Termine telefonisch, um Wartezeiten zu vermeiden."
+                           data-en="Emergency service: 24/7 by telephone appointment only. Please make appointments by phone to avoid waiting times.">
+                            Notdienst: 0-24 Uhr nur nach telefonischer Voranmeldung. Bitte vereinbaren Sie Termine telefonisch, um Wartezeiten zu vermeiden.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 data-de="Terminanfrage" data-en="Appointment Request">Terminanfrage</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name" data-de="Name" data-en="Name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" data-de="Telefon" data-en="Phone">Telefon</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet" data-de="Tierart & Name" data-en="Pet Type & Name">Tierart & Name</label>
+                            <input type="text" id="pet" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" data-de="Ihre Nachricht" data-en="Your Message">Ihre Nachricht</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span data-de="Anfrage senden" data-en="Send Request">Anfrage senden</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" data-de="Datenschutz" data-en="Privacy">Datenschutz</a>
+                <a href="#" data-de="Impressum" data-en="Imprint">Impressum</a>
+                <a href="#" data-de="Team" data-en="Team">Team</a>
+                <a href="#" data-de="Aktuelles" data-en="News">Aktuelles</a>
+                <a href="#" data-de="Links" data-en="Links">Links</a>
+            </div>
+            <p>&copy; 2025 Dr. Wolfgang Frötscher - Tierarzt in der Josefstadt. <span data-de="Alle Rechte vorbehalten" data-en="All rights reserved">Alle Rechte vorbehalten</span>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language switching functionality
+        let currentLang = 'de';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-de][data-en]').forEach(element => {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = element.getAttribute(`data-${lang}`);
+                } else {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                }
+            });
+
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Store preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+
+            // Animate hamburger menu
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            toggle.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.mobile-menu-toggle').classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // Show success message
+            submitBtn.innerHTML = currentLang === 'de' ?
+                '✓ Gesendet! Wir melden uns bald.' :
+                '✓ Sent! We\'ll contact you soon.';
+            submitBtn.style.background = '#4caf50';
+
+            // Reset form
+            setTimeout(() => {
+                event.target.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+            }, 3000);
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Highlight current day in opening hours
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved language preference
+            const savedLang = localStorage.getItem('preferredLanguage') || 'de';
+            if (savedLang !== 'de') {
+                // Find the correct language button and simulate click
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.textContent === savedLang.toUpperCase()) {
+                        btn.click();
+                    }
+                });
+            }
+
+            // Highlight current day
+            const days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+            const today = new Date().getDay();
+            const dayCards = document.querySelectorAll('.day-card');
+
+            if (dayCards[today === 0 ? 6 : today - 1]) {
+                dayCards[today === 0 ? 6 : today - 1].style.background = 'linear-gradient(135deg, var(--primary), var(--accent))';
+                dayCards[today === 0 ? 6 : today - 1].style.color = 'white';
+                dayCards[today === 0 ? 6 : today - 1].querySelector('.day-name').style.color = 'white';
+                dayCards[today === 0 ? 6 : today - 1].querySelector('.day-time').style.color = 'white';
+            }
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe service cards and other elements
+            document.querySelectorAll('.service-card, .stat, .info-item, .day-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
